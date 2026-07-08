@@ -5,33 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.ss4_md3.model.CourseStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "students")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Course {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CourseStatus status;
+    @Column(name = "email", nullable =false)
+    private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "instuctor_id")
-    private Instructor instructor;
-
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "student")
     private List<StudentEnrollment> enrollments = new ArrayList<>();
 }
